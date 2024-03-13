@@ -10,4 +10,4 @@
 #include "ALCHOLMCTargetDesc.h"
 
 // We need to define this function for linking succeed
-extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeALCHOLTargetMC() {}
+extern "C" void LLVMInitializeALCHOLTargetMC() {}

@@ -180,12 +180,12 @@ StringRef llvm::object::getELFRelocationTypeName(uint32_t Machine,
     default:
       break;
     }
-  case ELF::EM_ALCHOL:
-    switch (Type) {
-#include "llvm/BinaryFormat/ELFRelocs/ALCHOL.def"
-    default:
-      break;
-    }
+//   case ELF::EM_ALCHOL:
+//     switch (Type) {
+// #include "llvm/BinaryFormat/ELFRelocs/ALCHOL.def"
+//     default:
+//       break;
+//     }
     break;
   default:
     break;

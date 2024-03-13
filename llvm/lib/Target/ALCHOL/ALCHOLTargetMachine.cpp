@@ -19,7 +19,7 @@
 #include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/MC/TargetRegistry.h"
-#include "llvm/Transforms/IPO/PassManagerBuilder.h"
+#include "llvm/Transforms/IPO.h"
 #include "llvm/Transforms/Scalar.h"
 #include <optional>
 
@@ -33,7 +33,7 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeALCHOLTarget() {
 static std::string computeDataLayout(const Triple &TT, StringRef CPU,
                                      const TargetOptions &Options,
                                      bool IsLittle) {
-  std::string Ret = "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32";
+  std::string Ret = "e-m:e-p:64:64-i64:64-i128:128-n32:64-S64";
   return Ret;
 }
 
@@ -49,7 +49,7 @@ ALCHOLTargetMachine::ALCHOLTargetMachine(const Target &T, const Triple &TT,
                                          const TargetOptions &Options,
                                          std::optional<Reloc::Model> RM,
                                          std::optional<CodeModel::Model> CM,
-                                         CodeGenOpt::Level OL, bool JIT,
+                                         CodeGenOptLevel OL, bool JIT,
                                          bool IsLittle)
     : LLVMTargetMachine(T, computeDataLayout(TT, CPU, Options, IsLittle), TT,
                         CPU, FS, Options, getEffectiveRelocModel(JIT, RM),
@@ -63,7 +63,7 @@ ALCHOLTargetMachine::ALCHOLTargetMachine(const Target &T, const Triple &TT,
                                          const TargetOptions &Options,
                                          std::optional<Reloc::Model> RM,
                                          std::optional<CodeModel::Model> CM,
-                                         CodeGenOpt::Level OL, bool JIT)
+                                         CodeGenOptLevel OL, bool JIT)
     : ALCHOLTargetMachine(T, TT, CPU, FS, Options, RM, CM, OL, JIT, true) {}
 
 TargetPassConfig *ALCHOLTargetMachine::createPassConfig(PassManagerBase &PM) {
