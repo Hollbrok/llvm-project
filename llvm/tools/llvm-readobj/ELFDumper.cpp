@@ -1703,6 +1703,12 @@ static const EnumEntry<unsigned> ElfHeaderXtensaFlags[] = {
   LLVM_READOBJ_ENUM_ENT(ELF, EF_XTENSA_XT_LIT)
 };
 
+static const EnumEntry<unsigned> ElfHeaderALCHOLFlags[] = {
+  LLVM_READOBJ_ENUM_ENT(ELF, EF_ALCHOL_MACH_NONE),
+  LLVM_READOBJ_ENUM_ENT(ELF, EF_ALCHOL_XT_INSN),
+  LLVM_READOBJ_ENUM_ENT(ELF, EF_ALCHOL_XT_LIT)
+};
+
 const EnumEntry<unsigned> ElfSymOtherFlags[] = {
   LLVM_READOBJ_ENUM_ENT(ELF, STV_INTERNAL),
   LLVM_READOBJ_ENUM_ENT(ELF, STV_HIDDEN),
@@ -3609,6 +3615,9 @@ template <class ELFT> void GNUELFDumper<ELFT>::printFileHeaders() {
   else if (e.e_machine == EM_XTENSA)
     ElfFlags = printFlags(e.e_flags, ArrayRef(ElfHeaderXtensaFlags),
                           unsigned(ELF::EF_XTENSA_MACH));
+  else if (e.e_machine == EM_ALCHOL)
+    ElfFlags = printFlags(e.e_flags, ArrayRef(ElfHeaderALCHOLFlags),
+                          unsigned(ELF::EF_ALCHOL_MACH));
   else if (e.e_machine == EM_CUDA)
     ElfFlags = printFlags(e.e_flags, ArrayRef(ElfHeaderNVPTXFlags),
                           unsigned(ELF::EF_CUDA_SM));
@@ -6948,6 +6957,9 @@ template <class ELFT> void LLVMELFDumper<ELFT>::printFileHeaders() {
     else if (E.e_machine == EM_XTENSA)
       W.printFlags("Flags", E.e_flags, ArrayRef(ElfHeaderXtensaFlags),
                    unsigned(ELF::EF_XTENSA_MACH));
+    else if (E.e_machine == EM_ALCHOL)
+      W.printFlags("Flags", E.e_flags, ArrayRef(ElfHeaderALCHOLFlags),
+                   unsigned(ELF::EF_ALCHOL_MACH));
     else if (E.e_machine == EM_CUDA)
       W.printFlags("Flags", E.e_flags, ArrayRef(ElfHeaderNVPTXFlags),
                    unsigned(ELF::EF_CUDA_SM));

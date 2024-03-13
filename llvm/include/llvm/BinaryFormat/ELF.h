@@ -320,6 +320,7 @@ enum {
   EM_VE = 251,            // NEC SX-Aurora VE
   EM_CSKY = 252,          // C-SKY 32-bit processor
   EM_LOONGARCH = 258,     // LoongArch
+  EM_ALCHOL = 259,        // Arch for llvm-course by Hollbrok (A LC by HOL) 
 };
 
 // Object file classes.
@@ -1006,6 +1007,16 @@ enum : unsigned {
   EF_XTENSA_MACH_NONE = 0x00000000, // A base Xtensa implementation
   EF_XTENSA_XT_INSN = 0x00000100,
   EF_XTENSA_XT_LIT = 0x00000200,
+};
+
+// ALCHOL specific e_flags
+enum : unsigned {
+  // Four-bit ALCHOL machine type mask.
+  EF_ALCHOL_MACH = 0x0000000f,
+  // Various CPU types.
+  EF_ALCHOL_MACH_NONE = 0x00000000, // A base ALCHOL implementation
+  EF_ALCHOL_XT_INSN = 0x00000100,
+  EF_ALCHOL_XT_LIT = 0x00000200,
 };
 
 // ELF Relocation types for Xtensa
